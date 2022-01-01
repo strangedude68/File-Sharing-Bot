@@ -41,12 +41,9 @@ async def new_post(client: Client, message: Message):
 
     converted_id = message.message_id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
-    base64_string = await encode(f"get-{msg_id * abs(client.db_channel.id)}")
+    base64_string = await encode(string)
     link = f"https://telegram.dog/{client.username}?start={base64_string}"
-    short = f"https://droplink.co/st?api={API}&url={link}"
-    final_link = f"<b>Here is your link</b>\n\n<code>{link}</code> \n\n <b>Droplink URL</b> - <code>{short}</code>"
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
-    await channel_message.reply_text(final_link, quote=True, reply_markup=reply_markup)
     try:
         await message.edit_reply_markup(reply_markup)
     except Exception as e:
