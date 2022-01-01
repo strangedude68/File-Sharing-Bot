@@ -23,7 +23,7 @@ async def channel_post(client: Client, message: Message):
         return
     converted_id = post_message.message_id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
-    base64_string = await encode(f"get-{msg_id * abs(client.db_channel.id)}")
+    base64_string = await encode(string)
     link = f"https://telegram.dog/{client.username}?start={base64_string}"
     short = f"https://droplink.co/st?api={API}&url={link}"
     final_link - f"<b>Here is your link</b>\n\n<code>{link}</code> \n\n <b>Droplink URL</b> - <code>{short}</code>"
