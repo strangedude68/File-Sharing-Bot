@@ -28,7 +28,7 @@ async def channel_post(client: Client, message: Message):
     short = f"https://droplink.co/st?api={API}&url={link}"
     final_link = f"<b>Here is your link</b>\n\n<code>{link}</code> \n\n <b>Droplink URL</b> - <code>{short}</code>"
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
-    await channel_message.reply_text(final_link, quote=True, reply_markup=reply_markup)
+    await reply_text.edit(final_link, reply_markup=reply_markup, disable_web_page_preview = True)
 
     if not DISABLE_CHANNEL_BUTTON:
         await post_message.edit_reply_markup(reply_markup)
